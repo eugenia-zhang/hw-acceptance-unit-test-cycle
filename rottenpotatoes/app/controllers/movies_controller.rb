@@ -9,7 +9,13 @@ class MoviesController < ApplicationController
   #added:
   def same_director
     @movie = Movie.find params[:id]
-    @movies = @movie.others_by_same_director()
+    # @director = @movie.director
+    unless @movie.director.to_s.strip.empty?
+      @movies = @movie.others_by_same_director()
+    else
+      redirect_to "/movies",  alert: "'#{@movie.title}' has no director info" and return
+      # redirect_to "/movies",  flash: { movie_no_director: "'#{@movie.title}' has no director info"}    
+    end
   end
 
   def index
