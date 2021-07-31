@@ -4,4 +4,7 @@ class Movie < ActiveRecord::Base
 		# Movie.find_all_by_director(director)
 		Movie.where("director = \"#{director}\"")
 	end
+	def return_one
+		1
+	end
 end
