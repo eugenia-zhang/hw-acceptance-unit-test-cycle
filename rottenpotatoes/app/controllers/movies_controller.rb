@@ -6,6 +6,12 @@ class MoviesController < ApplicationController
     # will render app/views/movies/show.<extension> by default
   end
 
+  #added:
+  def same_director
+    @movie = Movie.find params[:id]
+    @movies = @movie.others_by_same_director()
+  end
+
   def index
     @movies = Movie.all
   end
@@ -42,6 +48,6 @@ class MoviesController < ApplicationController
   # Making "internal" methods private is not required, but is a common practice.
   # This helps make clear which methods respond to requests, and which ones do not.
   def movie_params
-    params.require(:movie).permit(:title, :rating, :description, :release_date)
+    params.require(:movie).permit(:title, :rating, :description, :release_date, :director)
   end
 end
